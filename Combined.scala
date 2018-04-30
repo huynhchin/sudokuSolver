@@ -68,6 +68,7 @@ class sudoku {
   }
 }
 
+// Can function as main. Checker functions are implemented, just need to do the actual solving
 object Sudoku extends App {
   def readInput(puzzle: Array[Array[Int]]) : Array[Array[Int]] = {
     //Reading sudoku board from file
@@ -75,18 +76,9 @@ object Sudoku extends App {
     val inFile = Source.fromFile("board.txt");
     var fileLine = 0;
     var badLineLength = false;
+    
+    //Check if sudoku lines are the right length, put them into multi-dimensional array
     for (line <- inFile.getLines()) {
-      // if line is the wrong length, say invalid input
-      // split line and convert it into numbers, storing them in an array
-
-
-      // old code
-      //    var line = scala.io.StdIn.readLine("Enter line number " + (i + 1) + " of the sudoku.");
-      //    while (line.length() != 9) {
-      //      println("That line is the wrong length!");
-      //      line = scala.io.StdIn.readLine("Enter line number " + (i + 1) + " of the sudoku.");
-      //    }
-
       if (line.length() != 9) {
         print("One of the lines is the wrong length. Starting over...");
         badLineLength = true;
@@ -100,9 +92,6 @@ object Sudoku extends App {
           numArr(j) = newNum;
         }
         puzzle(fileLine) = numArr;
-        //      if (i < 8) {
-        //        readInput(i + 1, puzzle);
-        //      }
         fileLine = fileLine + 1;
       } catch {
         case nfe: NumberFormatException => {
