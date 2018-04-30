@@ -23,7 +23,7 @@ class sudoku {
     }
     return false
   }
-
+  
   def check_row(board, row, num): Unit = {
     for (x <- 0 to 9) {
       if (board(row)(x) == num) {
@@ -103,37 +103,7 @@ object Sudoku extends App {
     inFile.close();
     return puzzle;
   }
-
-
-  def checkIfValid(array: Array[Array[Int]]): Boolean = {
-    var invalidVal = false;
-    for (i <- 0 to 8) {
-      var usedNums = new Array[Int](9);
-      for (j <- 0 to 8) {
-        var currVal = array(i)(j);
-        if (currVal != 0 && usedNums.contains(currVal)) {
-          println("Invalid value in row " + (i + 1) + ", column " + (j + 1));
-          invalidVal = true;
-        } else {
-          usedNums(j) = currVal;
-        }
-      }
-    }
-    for (j <- 0 to 8) {
-      var usedNums = new Array[Int](9);
-      for (i <- 0 to 8) {
-        var currVal = array(i)(j);
-        if (currVal != 0 && usedNums.contains(currVal)) {
-          println("Invalid value in row " + (i + 1) + ", column " + (j + 1));
-          invalidVal = true;
-        } else {
-          usedNums(j) = currVal;
-        }
-      }
-    }
-    return invalidVal;
-  }
-
+  
   def solvePuzzle(): Unit = {
     var line = "";
     var puzzle = Array.ofDim[Int](9, 9);
