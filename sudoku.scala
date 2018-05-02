@@ -53,16 +53,37 @@ object sudoku {
   }
 
   def main(args: Array[String]) {
-    val board = Array(Array(3,0,6,5,0,8,4,0,0),
-                      Array(5,2,0,0,0,0,0,0,0),
-                      Array(0,8,7,0,0,0,0,3,1),
-                      Array(0,0,3,0,1,0,0,8,0),
-                      Array(9,0,0,8,6,3,0,0,5),
-                      Array(0,5,0,0,9,0,6,0,0),
-                      Array(1,3,0,0,0,0,2,5,0),
-                      Array(0,0,0,0,0,0,0,7,4),
-                      Array(0,0,5,2,0,6,3,0,0))
+    var board = Array.ofDim[Int](9, 9);
 
+    scala.io.StdIn.readLine("Input board into 'board.txt' file. Press Enter when done.");
+    val inFile = Source.fromFile("board.txt");
+    var fileLine = 0;
+    var badLineLength = false;
+
+    //Check if sudoku lines are the right length, put them into multi-dimensional array
+    for (line <- inFile.getLines()) {
+      if (line.length() != 9) {
+        print("One of the lines is the wrong length. Starting over...");
+        badLineLength = true;
+        break;
+      }
+      var lineArr = line.split("");
+      try {
+        var numArr = new Array[Int](9);
+        for (j <- 0 to 8) {
+          var newNum = lineArr(j).toInt;
+          numArr(j) = newNum;
+        }
+        board(fileLine) = numArr;
+        fileLine = fileLine + 1;
+      } catch {
+        case nfe: NumberFormatException => {
+          println("You didn't enter all numbers! Now we have to start over!");
+
+        }
+      }
+    }
+    inFile.close();
 
     if(solve(board) == true) {
       print_board(board)
