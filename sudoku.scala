@@ -78,7 +78,7 @@ object sudoku {
         fileLine = fileLine + 1;
       } catch {
         case nfe: NumberFormatException => {
-          println("You didn't enter all numbers! Now we have to start over!");
+          println("You didn't enter all numbers! Exiting program...");
 
         }
       }
