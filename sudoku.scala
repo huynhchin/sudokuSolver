@@ -63,9 +63,7 @@ object sudoku {
     //Check if sudoku lines are the right length, put them into multi-dimensional array
     for (line <- inFile.getLines()) {
       if (line.length() != 9) {
-        print("One of the lines is the wrong length. Starting over...");
-        badLineLength = true;
-        break;
+        throw new Exception("One of the lines is the wrong length. Exiting program...");
       }
       var lineArr = line.split("");
       try {
@@ -79,7 +77,6 @@ object sudoku {
       } catch {
         case nfe: NumberFormatException => {
           println("You didn't enter all numbers! Exiting program...");
-
         }
       }
     }
