@@ -1,3 +1,5 @@
+import scala.io.Source
+
 object sudoku {
   def print_board(board: Array[Array[Int]]) {
     (0 to 8).foreach(x => {
