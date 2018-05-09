@@ -1,6 +1,12 @@
+// Chin Huynh
+// Chris Delaney
+// Stephen Joyce
+// CPSC 326
+// Final Project: Sudoku Solver
+
 import scala.io.Source
 
-object sudoku {
+object Sudoku {
   def print_board(board: Array[Array[Int]]) {
     (0 to 8).foreach(x => {
       (0 to 8).foreach(y => print(board(x)(y)))
@@ -35,7 +41,7 @@ object sudoku {
 
     return !row_taken && !col_taken && ! box_taken
   }
-  
+
   def solve_helper_helper(board:Array[Array[Int]], row:Int, col:Int): Boolean = {
     (1 to 9).foreach(num => if (is_valid_loc(board, row, col, num) == true) {
       board(row)(col) = num
@@ -56,25 +62,7 @@ object sudoku {
     }
     solve_helper(spot_open, board, loc(0), loc(1))
   }
-/*
-  def solve(board: Array[Array[Int]]): Boolean = {
-    val (spot_open:Boolean, loc:Array[Int]) = empty_spot(board)
 
-    if (spot_open == false) {
-      return true
-    }
-
-    val row:Int = loc(0)
-    val col:Int = loc(1)
-
-    (1 to 9).foreach(num => if (is_valid_loc(board,row,col,num) == true) {
-      board(row)(col) = num
-      if (solve(board) == true) return true
-      board(row)(col) = 0
-    })
-    return false
-  }
-*/
   def main(args: Array[String]) {
     var board = Array.ofDim[Int](9, 9);
 
