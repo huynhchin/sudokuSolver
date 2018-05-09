@@ -6,7 +6,7 @@
 
 import scala.io.Source
 
-object Sudoku {
+object sudoku {
   def print_board(board: Array[Array[Int]]) {
     (0 to 8).foreach(x => {
       (0 to 8).foreach(y => print(board(x)(y)))
