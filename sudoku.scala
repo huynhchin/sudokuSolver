@@ -35,7 +35,28 @@ object sudoku {
 
     return !row_taken && !col_taken && ! box_taken
   }
+  
+  def solve_helper_helper(board:Array[Array[Int]], row:Int, col:Int): Boolean = {
+    (1 to 9).foreach(num => if (is_valid_loc(board, row, col, num) == true) {
+      board(row)(col) = num
+      if (solve(board)) return true
+      board(row)(col) = 0
+    })
+    return false
+  }
 
+  def solve(board: Array[Array[Int]]): Boolean = {
+    val (spot_open:Boolean, loc:Array[Int]) = empty_spot(board)
+    val row = loc(0)
+    val col = loc(1)
+
+    def solve_helper(open_spot:Boolean, board: Array[Array[Int]], row:Int, col:Int): Boolean = open_spot match {
+      case false => true
+      case true => solve_helper_helper(board, row, col)
+    }
+    solve_helper(spot_open, board, loc(0), loc(1))
+  }
+/*
   def solve(board: Array[Array[Int]]): Boolean = {
     val (spot_open:Boolean, loc:Array[Int]) = empty_spot(board)
 
@@ -53,7 +74,7 @@ object sudoku {
     })
     return false
   }
-
+*/
   def main(args: Array[String]) {
     var board = Array.ofDim[Int](9, 9);
 
