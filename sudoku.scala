@@ -85,6 +85,7 @@ object sudoku {
     inFile.close();
 
     if(solve(board) == true) {
+      println("The answer is:")
       print_board(board)
     } else {
       println("No solution")
